@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+    <robot name="urdfbot">
+
+        <!-- ********************** Links ********************** -->
+        <link name="base_link">
+            <visual>        
+                <geometry>
+                    <cylinder length="0.155" radius="0.178"/>
+                </geometry>
+            </visual>
+        </link>
+
+        <link name="standoff_rods_1">
+            <visual>
+            <origin rpy="0 0 0" xyz="0 0 0.1" />
+                <geometry>
+                    <cylinder length="0.22" radius="0.02"/>
+                </geometry>
+            </visual>
+        </link>
+
+        <link name="standoff_rods_2">
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 0.1" />
+                <geometry>
+                    <cylinder length="0.22" radius="0.02"/>
+                </geometry>
+            </visual>
+        </link>
+
+        <link name="cup_holder_tray">
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 0.1" />
+                <geometry>
+                    <cylinder length="0.09" radius="0.16"/>
+                </geometry>
+            </visual>
+        </link>
+
+        <!-- Wheel Left -->
+        <link name="left_wheel">      
+            <visual>
+                <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
+                <geometry>
+                    <cylinder length="0.001" radius="0.035"/>
+                </geometry>
+                <material name="black"/>
+            </visual>
+        </link>
+
+        <!-- Wheel Right -->
+        <link name="right_wheel">      
+            <visual>
+                <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
+                <geometry>
+                    <cylinder length="0.001" radius="0.035"/>
+                </geometry>
+                <material name="black"/>
+            </visual>
+        </link>
+
+        <!-- ********************** Joints ********************** -->
+
+        <joint name="base_link_to_standoff_rods_1_joint" type="fixed">
+            <origin rpy="0 0 0" xyz="0 0 0" />
+            <parent link="base_link" />
+            <child link="standoff_rods_1" />
+        </joint>
+
+        <joint name="base_link_to_standoff_rods_2_joint" type="fixed">
+            <origin rpy="0 0 0" xyz="0 0 0" />
+            <parent link="base_link" />
+            <child link="standoff_rods_2" />
+        </joint>
+
+        <joint name="standoff_rods_1_to_cup_holder_tray_joint" type="fixed">
+            <origin rpy="0 0 0" xyz="0 0 0" />
+            <parent link="standoff_rods_1" />
+            <child link="cup_holder_tray" />
+        </joint>
+
+        <joint name="base_link_to_left_wheel_joint" type="fixed">
+            <origin rpy="0 0 0" xyz="0 0 0" />
+            <parent link="base_link" />
+            <child link="left_wheel" />
+        </joint>
+
+        <joint name="base_link_to_right_wheel_joint" type="fixed">
+            <origin rpy="0 0 0" xyz="0 0 0" />
+            <parent link="base_link" />
+            <child link="right_wheel" />
+        </joint>
+
+    </robot>
