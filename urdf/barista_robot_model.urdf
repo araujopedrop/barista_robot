@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
     <robot name="urdfbot">
 
-        <!-- ********************** Links ********************** -->
+        <!-- ******************************************** Links ******************************************** -->
         <link name="base_link">
             <visual>        
                 <geometry>
@@ -42,9 +42,8 @@
             <visual>
                 <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
                 <geometry>
-                    <cylinder length="0.001" radius="0.035"/>
+                    <cylinder length="0.0206" radius="0.0352"/>
                 </geometry>
-                <material name="black"/>
             </visual>
         </link>
 
@@ -53,13 +52,34 @@
             <visual>
                 <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
                 <geometry>
-                    <cylinder length="0.001" radius="0.035"/>
+                    <cylinder length="0.0206" radius="0.0352"/>
                 </geometry>
-                <material name="black"/>
             </visual>
         </link>
 
-        <!-- ********************** Joints ********************** -->
+        <!-- Caster Wheel Front -->
+        <link name="front_caster_wheel">
+            <visual>
+                <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
+                <geometry>          
+                    <sphere radius="0.010"/>
+                </geometry>
+            </visual>
+        </link>
+
+        <!-- Caster Wheel Back -->
+        <link name="back_caster_wheel">
+            <visual>
+                <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
+                <geometry>
+                    <sphere radius="0.010"/>
+                </geometry>
+            </visual>
+        </link>
+
+
+
+        <!-- ******************************************** Joints ******************************************** -->
 
         <joint name="base_link_to_standoff_rods_1_joint" type="fixed">
             <origin rpy="0 0 0" xyz="0 0 0" />
@@ -90,5 +110,18 @@
             <parent link="base_link" />
             <child link="right_wheel" />
         </joint>
+
+        <joint name="base_link_to_front_caster_wheel_joint" type="fixed">
+            <origin rpy="0 0 0" xyz="0 0 0" />
+            <parent link="base_link" />
+            <child link="front_caster_wheel" />
+        </joint>
+
+        <joint name="base_link_to_back_caster_wheel_joint" type="fixed">
+            <origin rpy="0 0 0" xyz="0 0 0" />
+            <parent link="base_link" />
+            <child link="back_caster_wheel" />
+        </joint>
+
 
     </robot>
