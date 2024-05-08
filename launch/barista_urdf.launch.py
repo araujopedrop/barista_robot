@@ -22,7 +22,7 @@ def generate_launch_description():
 
     # Position and orientation
     # [X, Y, Z]
-    position = [0.0, 0.0, 0.2]
+    position = [0.0, 0.0, 3]
     # [Roll, Pitch, Yaw]
     orientation = [0.0, 0.0, 0.0]
     # Base Name or robot
@@ -52,11 +52,6 @@ def generate_launch_description():
         os.environ['GAZEBO_PLUGIN_PATH'] = os.environ['GAZEBO_PLUGIN_PATH'] + ':' + install_dir + '/lib'
     else:
         os.environ['GAZEBO_PLUGIN_PATH'] = install_dir + '/lib'
-
-    
-
-    print("GAZEBO MODELS PATH=="+str(os.environ["GAZEBO_MODEL_PATH"]))
-    print("GAZEBO PLUGINS PATH=="+str(os.environ["GAZEBO_PLUGIN_PATH"]))
 
     # Gazebo launch
     gazebo = IncludeLaunchDescription(
@@ -97,8 +92,10 @@ def generate_launch_description():
     )
 
     # RVIZ Configuration
-    rviz_config_dir = os.path.join(get_package_share_directory(package_description), 'rviz', 'urdf_vis.rviz')
+    rviz_config_dir = os.path.join(get_package_share_directory(package_description), "config", 'config_file.rviz')
 
+    print(" ************************************************************************************* ")
+    print(rviz_config_dir)
 
     rviz_node = Node(
             package='rviz2',
@@ -118,6 +115,6 @@ def generate_launch_description():
             description='SDF world file'),
             robot_state_publisher_node,
             spawn_robot,
-            #rviz_node
+            rviz_node
         ]
     )
