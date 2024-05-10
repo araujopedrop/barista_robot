@@ -34,6 +34,7 @@ install(
 	models
 	meshes
 	config
+	xacro
   DESTINATION
     share/${PROJECT_NAME}/
 )
