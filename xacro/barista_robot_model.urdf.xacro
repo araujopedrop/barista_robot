@@ -23,6 +23,10 @@
         <color rgba="0.0 0.0 1.0 1"/>
     </material>
 
+    <material name="yellow">
+        <color rgba="1.0 1.0 0.0 1"/>
+    </material>
+
     <!-- ******************************************** Links ******************************************** -->
     <link name="base_link">
         <visual>        
@@ -54,6 +58,10 @@
     <xacro:standoff standoff_name="standoff_rods_1"/>
 
     <xacro:standoff standoff_name="standoff_rods_2"/>
+
+    <xacro:standoff standoff_name="standoff_rods_3"/>
+
+    <xacro:standoff standoff_name="standoff_rods_4"/>
 
     <xacro:cup_holder_tray cup_holder_tray_name="cup_holder_tray"/>
 
@@ -145,7 +153,7 @@
             <geometry>
                 <sphere radius="0.0352"/>
             </geometry>
-            <material name="green_dark"/>
+            <material name="yellow"/>
         </visual>
 
         <collision>
@@ -167,7 +175,7 @@
         <kd>1000000000000000000000000000.0</kd>
         <mu1>0.5</mu1>
         <mu2>0.5</mu2>
-        <material>Gazebo/Purple</material>
+        <material>Gazebo/Yellow</material>
     </gazebo>
 
     <!-- Caster Wheel Back -->
@@ -233,7 +241,7 @@
             <geometry>
             <sphere radius="0.0352"/>
             </geometry>
-            <material name="green_light"/>
+            <material name="yellow"/>
         </visual>
 
         <collision>
@@ -316,7 +324,8 @@
 
             <!-- Laser Position Control-->
             <joint name="laser_scan_link_joint" type="prismatic">
-                <origin rpy="0 0 0" xyz="0.0 0.0 0.155"/>
+                <!--origin rpy="0 0 0" xyz="0.0 0.0 0.155"/-->
+                <origin rpy="0 0 0" xyz="0.0 0.0 0.3"/>
                 <parent link="base_link"/>
                 <child link="laser_scan_link"/>
                 <axis xyz="0 0 1"/>
@@ -324,8 +333,9 @@
                 <dynamics damping="0.1" friction="1.0"/>
             </joint>
 
+            <!-- -->>
             <joint name="laser_scan_frame_joint" type="fixed">
-                <origin rpy="0 0 0" xyz="0 0 0.03"/>
+                <origin rpy="0 0 0" xyz="0 0 0.0"/>
                 <parent link="laser_scan_link"/>
                 <child link="laser_scan_frame"/>
                 <axis xyz="0 0 0"/>
@@ -333,7 +343,8 @@
 
             <!-- Visual Laser Model to be rotated -->
             <joint name="laser_scan_model_link_joint" type="continuous">
-                <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+                <!--origin rpy="0 0 -1.57" xyz="0.0 0.0 0.0"/-->
+                <origin rpy="0 0 -1.57" xyz="0.0 0.0 -0.145"/>
                 <parent link="laser_scan_link"/>
                 <child link="laser_scan_model_link"/>
                 <axis xyz="0 0 1"/>
@@ -410,15 +421,27 @@
     <!-- ******************************************** Joints ******************************************** -->
 
     <joint name="base_link_to_standoff_rods_1_joint" type="fixed">
-        <origin rpy="0 0 0" xyz="0.10 0 0.1875" />
+        <origin rpy="0 0 0" xyz="0.10 0.05 0.1875" />
         <parent link="base_link" />
         <child link="standoff_rods_1" />
     </joint>
 
     <joint name="base_link_to_standoff_rods_2_joint" type="fixed">
-        <origin rpy="0 0 0" xyz="-0.10 0 0.1875" />
+        <origin rpy="0 0 0" xyz="-0.10 0.05 0.1875" />
         <parent link="base_link" />
         <child link="standoff_rods_2" />
+    </joint>
+
+    <joint name="base_link_to_standoff_rods_3_joint" type="fixed">
+        <origin rpy="0 0 0" xyz="0.10 -0.05 0.1875" />
+        <parent link="base_link" />
+        <child link="standoff_rods_3" />
+    </joint>
+
+    <joint name="base_link_to_standoff_rods_4_joint" type="fixed">
+        <origin rpy="0 0 0" xyz="-0.10 -0.05 0.1875" />
+        <parent link="base_link" />
+        <child link="standoff_rods_4" />
     </joint>
 
     <joint name="base_link_to_cup_holder_tray_joint" type="fixed">

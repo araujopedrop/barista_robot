@@ -5,6 +5,10 @@
     <xacro:property name="rod_length" value="0.22"/>
     <xacro:property name="rod_width" value="0.01"/>
 
+    <material name="white">
+        <color rgba="1.0 1.0 1.0 1"/>
+    </material>
+
 
     <xacro:macro name="standoff" params="standoff_name">
             
@@ -14,7 +18,7 @@
                 <geometry>
                     <cylinder length="${rod_length}" radius="${rod_width}"/>
                 </geometry>
-                <material name="red"/>
+                <material name="white"/>
             </visual>
 
             <collision>
