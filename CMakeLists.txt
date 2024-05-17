@@ -9,6 +9,9 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclpy REQUIRED)
 find_package(gazebo_ros REQUIRED)
+find_package(tf2_ros REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(nav_msgs REQUIRED)
 
 # uncomment the following section in order to fill in
 # further dependencies manually.
@@ -26,18 +29,23 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
+install(PROGRAMS
+  scripts/rick_broadcaster.py
+  scripts/morty_broadcaster.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 install(
   DIRECTORY
     launch
    	urdf
 	worlds
-	models
 	meshes
 	config
 	xacro
+	scripts
   DESTINATION
     share/${PROJECT_NAME}/
 )
-
 
 ament_package()
