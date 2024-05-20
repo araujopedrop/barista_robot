@@ -14,7 +14,8 @@ class CamBotOdomToTf(Node):
     def __init__(self):
         super().__init__('rick_broadcaster_node')
 
-        self._robot_base_frame = "rick/base_link"
+        #self._robot_base_frame = "rick/base_link"
+        self._robot_base_frame = "rick/odom"
         self.init_tf_message()
 
         self.subscriber = self.create_subscription(

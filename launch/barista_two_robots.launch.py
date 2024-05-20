@@ -19,17 +19,6 @@ import xacro
 
 def generate_launch_description():
 
-
-    # Position and orientation
-    # [X, Y, Z]
-    position_rick_robot  = [0.0, 0.0, 3]
-    position_morty_robot = [1.0, 1.5, 3]
-    # [Roll, Pitch, Yaw]
-    orientation = [0.0, 0.0, 0.0]
-    # Base Name or robot
-
-
-
     ####### DATA INPUT ##########
     robot_desc_file           = 'barista_robot_model.urdf.xacro'
     package_description       = "barista_robot_description"
@@ -102,7 +91,7 @@ def generate_launch_description():
     spawn_morty = Node(
         package='gazebo_ros',
         executable='spawn_entity.py',
-        arguments=['-entity', 'robot2', '-x', '1.0', '-y', '1.0', '-z', '0.0',
+        arguments=['-entity', 'robot2', '-x', '0.0', '-y', '2.0', '-z', '0.0',
                    '-topic', robot_morty_name+'/robot_description']
     )
     
