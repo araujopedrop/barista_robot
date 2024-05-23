@@ -19,8 +19,6 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 def generate_launch_description():
 
-
-
     ####### DATA INPUT ##########
     urdf_file                 = 'barista_robot_model.urdf'
     package_description       = "barista_robot_description"

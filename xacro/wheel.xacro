@@ -13,7 +13,7 @@
             
         <link name="${wheel_name}">  
             <visual>
-                <origin rpy="0 1.5707 0" xyz="0 0 0"/>
+                <origin rpy="1.5707 0 0" xyz="0 0 0"/>
                 <geometry>
                     <cylinder length="${wheel_width}" radius="${wheel_radius}"/>
                 </geometry>
@@ -21,7 +21,7 @@
             </visual>
 
             <collision>
-                <origin rpy="0 1.5707 0" xyz="0 0 0"/>
+                <origin rpy="1.5707 0 0" xyz="0 0 0"/>
                 <geometry>
                     <cylinder length="${wheel_width}" radius="${wheel_radius}"/>
                 </geometry>

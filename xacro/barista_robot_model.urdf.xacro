@@ -2,7 +2,6 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="barista_robot">
 
     <xacro:property name="robot_name" value="$(arg robot_name)"/>
-
     <xacro:property name="include_laser" default="true" />
 
     <xacro:include filename="$(find barista_robot_description)/xacro/wheel.xacro" />
@@ -28,6 +27,7 @@
     <material name="yellow">
         <color rgba="1.0 1.0 0.0 1"/>
     </material>
+
 
     <!-- ******************************************** Links ******************************************** -->
     <link name="base_link">
@@ -346,7 +346,7 @@
             <!-- Visual Laser Model to be rotated -->
             <joint name="laser_scan_model_link_joint" type="continuous">
                 <!--origin rpy="0 0 -1.57" xyz="0.0 0.0 0.0"/-->
-                <origin rpy="0 0 -1.57" xyz="0.0 0.0 -0.145"/>
+                <origin rpy="0 0 0" xyz="0.0 0.0 -0.145"/>
                 <parent link="laser_scan_link"/>
                 <child link="laser_scan_model_link"/>
                 <axis xyz="0 0 1"/>
@@ -424,25 +424,25 @@
     <!-- ******************************************** Joints ******************************************** -->
 
     <joint name="base_link_to_standoff_rods_1_joint" type="fixed">
-        <origin rpy="0 0 0" xyz="0.10 0.05 0.1875" />
+        <origin rpy="0 0 0" xyz="0.05 0.10 0.1875" />
         <parent link="base_link" />
         <child link="standoff_rods_1" />
     </joint>
 
     <joint name="base_link_to_standoff_rods_2_joint" type="fixed">
-        <origin rpy="0 0 0" xyz="-0.10 0.05 0.1875" />
+        <origin rpy="0 0 0" xyz="-0.05 0.10 0.1875" />
         <parent link="base_link" />
         <child link="standoff_rods_2" />
     </joint>
 
     <joint name="base_link_to_standoff_rods_3_joint" type="fixed">
-        <origin rpy="0 0 0" xyz="0.10 -0.05 0.1875" />
+        <origin rpy="0 0 0" xyz="0.05 -0.10 0.1875" />
         <parent link="base_link" />
         <child link="standoff_rods_3" />
     </joint>
 
     <joint name="base_link_to_standoff_rods_4_joint" type="fixed">
-        <origin rpy="0 0 0" xyz="-0.10 -0.05 0.1875" />
+        <origin rpy="0 0 0" xyz="-0.05 -0.10 0.1875" />
         <parent link="base_link" />
         <child link="standoff_rods_4" />
     </joint>
@@ -454,25 +454,25 @@
     </joint>
 
     <joint name="base_link_to_left_wheel_joint" type="continuous">  
-        <origin rpy="0 0 0" xyz="0.11 0 -0.0775" />
+        <origin rpy="0 0 0" xyz="0 0.11 -0.0775" />
         <parent link="base_link" />
         <child link="left_wheel" />
-        <axis rpy="0 0 0" xyz="1 0 0"/>
+        <axis rpy="0 0 0" xyz="0 1 0"/>
         <limit effort="10000" velocity="1000"/>
         <joint_properties damping="1.0" friction="1.0"/>
     </joint>
 
     <joint name="base_link_to_right_wheel_joint" type="continuous">  
-        <origin rpy="0 0 0" xyz="-0.11 0 -0.0775" />
+        <origin rpy="0 0 0" xyz="0 -0.11 -0.0775" />
         <parent link="base_link" />
         <child link="right_wheel" />
-        <axis rpy="0 0 0" xyz="1 0 0"/>
+        <axis rpy="0 0 0" xyz="0 1 0"/>
         <limit effort="10000" velocity="1000"/>
         <joint_properties damping="1.0" friction="1.0"/>
     </joint>
 
     <joint name="front_yaw_joint" type="continuous">
-        <origin rpy="0 0 0" xyz="0 0.1 -0.0775"/>
+        <origin rpy="0 0 0" xyz="0.1 0 -0.0775"/>
         <parent link="base_link" />
         <child link="front_yaw_link" />
         <axis xyz="0 0 1" />
@@ -499,7 +499,7 @@
     </joint>
 
     <joint name="back_yaw_joint" type="continuous">
-        <origin rpy="0 0 0" xyz="0 -0.1 -0.0775"/>
+        <origin rpy="0 0 0" xyz="-0.1 0 -0.0775"/>
         <parent link="base_link" />
         <child link="back_yaw_link" />
         <axis xyz="0 0 1" />

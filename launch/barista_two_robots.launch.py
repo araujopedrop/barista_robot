@@ -84,14 +84,14 @@ def generate_launch_description():
     spawn_rick = Node(
         package='gazebo_ros',
         executable='spawn_entity.py',
-        arguments=['-entity', 'robot1', '-x', '0.0', '-y', '0.0', '-z', '0.0',
+        arguments=['-entity', 'robot1', '-x', '0.0', '-y', '0.0', '-z', '0.35',
                    '-topic', robot_rick_name+'/robot_description']
     )
 
     spawn_morty = Node(
         package='gazebo_ros',
         executable='spawn_entity.py',
-        arguments=['-entity', 'robot2', '-x', '0.0', '-y', '2.0', '-z', '0.0',
+        arguments=['-entity', 'robot2', '-x', '1.0', '-y', '1.0', '-z', '0.35',
                    '-topic', robot_morty_name+'/robot_description']
     )
     
@@ -120,6 +120,24 @@ def generate_launch_description():
             name='morty_broadcaster',
         )
 
+    rick_static_broadcaster_node = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        name='static_transform_publisher_turtle_odom',
+        output='screen',
+        emulate_tty=True,
+        arguments=['0', '0', '0', '0', '0', '0', 'world', 'rick/odom']
+    )
+
+    morty_static_broadcaster_node = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        name='static_transform_publisher_turtle_odom',
+        output='screen',
+        emulate_tty=True,
+        arguments=['0', '0', '0', '0', '0', '0', 'world', 'morty/odom']
+    )
+
 
     # create and return launch description object
     return LaunchDescription(
@@ -129,12 +147,14 @@ def generate_launch_description():
             'world',
             default_value=[os.path.join(pkg_barista_robot_gazebo, 'worlds', 'barista_robot_empty.world'), ''],
             description='SDF world file'),
+            rick_static_broadcaster_node,
+            morty_static_broadcaster_node,
             rsp_rick,
             rsp_morty,
             spawn_rick,
             spawn_morty,
-            rick_broadcaster_node,
-            morty_broadcaster_node,
+            #rick_broadcaster_node,
+            #morty_broadcaster_node,
             rviz_node
         ]
     )
