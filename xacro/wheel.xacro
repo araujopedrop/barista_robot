@@ -5,7 +5,7 @@
     <xacro:property name="wheel_radius" value="0.0352"/>
     <xacro:property name="wheel_width" value="0.0206"/>
 
-    <material name="black">
+    <material name="black_">
         <color rgba="0.0 0.0 0.0 1"/>
     </material>
 
@@ -17,7 +17,7 @@
                 <geometry>
                     <cylinder length="${wheel_width}" radius="${wheel_radius}"/>
                 </geometry>
-                <material name="black"/>
+                <material name="black_"/>
             </visual>
 
             <collision>

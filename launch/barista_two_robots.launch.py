@@ -5,13 +5,11 @@ import os
 
 from launch_ros.actions                import Node
 from launch                            import LaunchDescription
-from ament_index_python.packages       import get_package_prefix
-from launch.actions                    import DeclareLaunchArgument
-from launch.actions                    import IncludeLaunchDescription
-from ament_index_python.packages       import get_package_share_directory
+from ament_index_python.packages       import get_package_prefix,get_package_share_directory
+from launch.actions                    import DeclareLaunchArgument,RegisterEventHandler,IncludeLaunchDescription,EmitEvent
 from launch.substitutions              import Command, LaunchConfiguration
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-
+from launch.event_handlers             import OnExecutionComplete, OnShutdown
 import xacro
 
 # this is the function launch  system will look for
@@ -123,7 +121,7 @@ def generate_launch_description():
     rick_static_broadcaster_node = Node(
         package='tf2_ros',
         executable='static_transform_publisher',
-        name='static_transform_publisher_turtle_odom',
+        name='rick_static_broadcaster',
         output='screen',
         emulate_tty=True,
         arguments=['0', '0', '0', '0', '0', '0', 'world', 'rick/odom']
@@ -132,7 +130,7 @@ def generate_launch_description():
     morty_static_broadcaster_node = Node(
         package='tf2_ros',
         executable='static_transform_publisher',
-        name='static_transform_publisher_turtle_odom',
+        name='morty_static_broadcaster',
         output='screen',
         emulate_tty=True,
         arguments=['0', '0', '0', '0', '0', '0', 'world', 'morty/odom']
@@ -142,19 +140,66 @@ def generate_launch_description():
     # create and return launch description object
     return LaunchDescription(
         [
-            gazebo,
-            DeclareLaunchArgument(
-            'world',
-            default_value=[os.path.join(pkg_barista_robot_gazebo, 'worlds', 'barista_robot_empty.world'), ''],
-            description='SDF world file'),
             rick_static_broadcaster_node,
             morty_static_broadcaster_node,
             rsp_rick,
             rsp_morty,
+            gazebo,
+            DeclareLaunchArgument(
+                'world',
+                default_value=[os.path.join(pkg_barista_robot_gazebo, 'worlds', 'barista_robot_empty.world'), ''],
+                description='SDF world file'),
             spawn_rick,
             spawn_morty,
-            #rick_broadcaster_node,
-            #morty_broadcaster_node,
-            rviz_node
+            rviz_node,
+            RegisterEventHandler(
+                OnExecutionComplete(
+                    target_action=rick_static_broadcaster_node,
+                    on_completion=[
+                        rsp_rick
+                    ]
+                )
+            ),
+            RegisterEventHandler(
+                OnExecutionComplete(
+                    target_action=morty_static_broadcaster_node,
+                    on_completion=[
+                        rsp_morty
+                    ]
+                )
+            ),
+            RegisterEventHandler(
+                OnExecutionComplete(
+                    target_action=rsp_rick,
+                    on_completion=[
+                        rsp_morty
+                    ]
+                )
+            ),
+            RegisterEventHandler(
+                OnExecutionComplete(
+                    target_action=rsp_morty,
+                    on_completion=[
+                        gazebo
+                    ]
+                )
+            ),
+            RegisterEventHandler(
+                OnExecutionComplete(
+                    target_action=gazebo,
+                    on_completion=[
+                        spawn_rick,
+                        spawn_morty
+                    ]
+                )
+            ),
+            RegisterEventHandler(
+                OnExecutionComplete(
+                    target_action=spawn_morty,
+                    on_completion=[
+                        rviz_node,
+                    ]
+                )
+            ),
         ]
     )

@@ -2,7 +2,7 @@
 
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-    <xacro:macro name="cup_holder_tray" params="cup_holder_tray_name">
+    <xacro:macro name="cup_holder_tray" params="cup_holder_tray_name body_color">
             
         <link name="${cup_holder_tray_name}">
 
@@ -11,7 +11,7 @@
                 <geometry>
                     <cylinder length="0.09" radius="0.16"/>
                 </geometry>
-                <material name="red"/>
+                <material name="${body_color}"/>
             </visual>
 
             <collision>
